@@ -4,15 +4,15 @@ import psycopg2
 import os
 from datetime import date, timedelta, datetime
 
-TOKEN = '1900223742:AAHSr57ONPwcqIFKSDvkBjLmmcJ1V9kZOz4'
+TOKEN = os.environ.get('TOKEN')
 PORT = int(os.environ.get('PORT', 5000))
 
 # Database Parameters
-heroku_host = "ec2-44-198-100-81.compute-1.amazonaws.com"
-heroku_database = "dfo0b73e3hacft"
-heroku_user = "uzjxpfwpahqcxd"
-heroku_password = "6403155428aee5767a9d03d9a2aa2d4753e4b903f656a45cf7383f7bcf507c8b"
-heroku_port = 5432
+heroku_host = os.environ.get('HOST')
+heroku_database = os.environ.get('DATABASE')
+heroku_user = os.environ.get('USER')
+heroku_password = os.environ.get('PASSWORD')
+heroku_port = int(os.environ.get('DATABASE_PORT'))
 # Staring the Database
 conn = psycopg2.connect(dbname=heroku_database, user=heroku_user, password=heroku_password, host=heroku_host,
                         port=heroku_port)
