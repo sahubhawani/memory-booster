@@ -19,7 +19,7 @@ conn = psycopg2.connect(dbname=heroku_database, user=heroku_user, password=herok
 
 remind_period0 = timedelta(days=0)
 remind_period3 = timedelta(days=3)
-remind_period7 = timedelta(days=7)
+remind_period7 = timedelta(days=7gi)
 remind_period21 = timedelta(days=21)
 
 
