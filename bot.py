@@ -16,8 +16,6 @@ heroku_password = os.environ.get('PASSWORD')
 heroku_port = int(os.environ.get('DATABASE_PORT'))
 
 
-TOKEN = "1424695833:AAHlnvfy57di4GL7BvB8VcUF89AN0rU2PCw"
-
 # Staring the Database
 conn = psycopg2.connect(dbname=heroku_database, user=heroku_user, password=heroku_password, host=heroku_host,
                         )  # port=heroku_port
