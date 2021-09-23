@@ -6,7 +6,7 @@ from datetime import date, timedelta, datetime, time
 
 # Heroku cloud server parameter
 TOKEN = os.environ.get('TOKEN')
-PORT = 80 #int(os.environ.get('PORT', 5000))
+PORT = os.environ.get('PORT', 5000)
 
 # Heroku Database Parameters
 heroku_host = os.environ.get('HOST')
