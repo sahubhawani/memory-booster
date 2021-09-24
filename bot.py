@@ -57,7 +57,7 @@ def write_to_db(update, context: CallbackContext):  #
 
 def remind(update, context: CallbackContext):
     chat_id = update.message.chat_id
-    context.bot.send_message(chat_id=chat_id, text="Revise the below topics tomorrow:")
+    context.bot.send_message(chat_id=chat_id, text="Revise the below topics today:")
     with conn:
         with conn.cursor() as cur:
             cur.execute("SELECT * FROM topiclist")
@@ -72,7 +72,7 @@ def remind(update, context: CallbackContext):
 
 def auto_remind(context: CallbackContext):
     chat_id = "-1001248983748"
-    context.bot.send_message(chat_id=chat_id, text="Revise the below topics tomorrow:")
+    context.bot.send_message(chat_id=chat_id, text="Revise the below topics today:")
     with conn:
         with conn.cursor() as cur:
             cur.execute("SELECT * FROM topiclist")
