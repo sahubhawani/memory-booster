@@ -6,7 +6,7 @@ from datetime import date, timedelta, datetime, time
 
 # Heroku cloud server parameter
 TOKEN = os.environ.get('TOKEN')
-PORT = os.environ.get('PORT', 8443)
+PORT = os.environ.get('PORT', 5000)
 
 # Heroku Database Parameters
 heroku_host = os.environ.get('HOST')
@@ -18,7 +18,7 @@ heroku_port = int(os.environ.get('DATABASE_PORT'))
 
 # Staring the Database
 conn = psycopg2.connect(dbname=heroku_database, user=heroku_user, password=heroku_password, host=heroku_host,
-                        port=heroku_port)  #
+                        port=heroku_port)
 
 remind_period0 = timedelta(days=0)
 remind_period3 = timedelta(days=3)
