@@ -117,8 +117,9 @@ def main():
     dp.add_handler(CommandHandler("start", start))
     updater.start_webhook(listen="0.0.0.0",
                           port=int(PORT),
-                          url_path=TOKEN)
-    updater.bot.setWebhook('https://memory-booster.herokuapp.com/' + TOKEN)
+                          url_path=TOKEN,
+                          webhook_url='https://memory-booster.herokuapp.com/' + TOKEN)
+    #updater.bot.setWebhook('https://memory-booster.herokuapp.com/' + TOKEN)
     updater.idle()
 
 
