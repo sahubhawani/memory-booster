@@ -110,7 +110,7 @@ def main():
     updater = Updater(TOKEN, use_context=True)
     job_queue = updater.job_queue
     dp = updater.dispatcher
-    job_queue.run_daily(auto_remind, time(hour=9, minute=35, second=00))
+    job_queue.run_daily(auto_remind, time(hour=2, minute=00, second=00))
     dp.add_handler(MessageHandler(Filters.text & ~Filters.command, write_to_db))
     dp.add_handler(CommandHandler("remind", remind))
     dp.add_handler(CommandHandler("show_all", show_all))
@@ -119,7 +119,6 @@ def main():
                           port=int(PORT),
                           url_path=TOKEN,
                           webhook_url='https://memory-booster.herokuapp.com/' + TOKEN)
-    #updater.bot.setWebhook('https://memory-booster.herokuapp.com/' + TOKEN)
     updater.idle()
 
 
