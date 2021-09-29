@@ -38,21 +38,24 @@ def write_to_db(update, context: CallbackContext):  #
     message = update.message.text  #
     try:
         first_str = message.split(",")[0]
-        topic = message.split(",")[1].strip()
         if first_str == "del":
             topic_date_str = message.split(",")[1].strip()
             delete_from_db(topic_date_str)
             context.bot.send_message(chat_id=chat_id, text="Entries for the given date is deleted from the Database")
         else:
             topic_date = datetime.strptime(first_str, "%Y/%m/%d")
-            topic = message.split(",")[1].strip()
+            topic = ",".join(message.split(",")[1:]).strip()
+            with conn:
+                with conn.cursor() as cur:
+                    cur.execute("INSERT INTO topiclist (topicdate,topic) VALUES(%s,%s)", (topic_date, topic))
+            context.bot.send_message(chat_id=chat_id, text="Thanks, this topic is added to the Database")
     except:
         topic = message.strip()
         topic_date = date.today()
-    with conn:
-        with conn.cursor() as cur:
-            cur.execute("INSERT INTO topiclist (topicdate,topic) VALUES(%s,%s)", (topic_date, topic))
-    context.bot.send_message(chat_id=chat_id, text="Thanks, this topic is added to the Database")
+        with conn:
+            with conn.cursor() as cur:
+                cur.execute("INSERT INTO topiclist (topicdate,topic) VALUES(%s,%s)", (topic_date, topic))
+        context.bot.send_message(chat_id=chat_id, text="Thanks, this topic is added to the Database")
 
 
 def remind(update, context: CallbackContext):
