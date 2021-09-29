@@ -110,7 +110,7 @@ def main():
     updater = Updater(TOKEN, use_context=True)
     job_queue = updater.job_queue
     dp = updater.dispatcher
-    job_queue.run_daily(auto_remind, time(hour=2, minute=30, second=30))
+    job_queue.run_daily(auto_remind, time(hour=2, minute=30, second=50))
     dp.add_handler(MessageHandler(Filters.text & ~Filters.command, write_to_db))
     dp.add_handler(CommandHandler("remind", remind))
     dp.add_handler(CommandHandler("show_all", show_all))
