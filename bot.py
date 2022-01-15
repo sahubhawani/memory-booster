@@ -80,7 +80,7 @@ def write_to_db(update, context: CallbackContext):  #
 
             else:
                 topic_date = datetime.strptime(first_str, "%Y/%m/%d")
-                topic = message.split(",")[1].strip()
+                topic = message.split(",")[1:].strip()
         except:
             topic = message.strip()
             topic_date = date.today()
