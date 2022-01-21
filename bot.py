@@ -6,7 +6,6 @@ from datetime import date, timedelta, datetime, time
 # Heroku cloud server parameter
 TOKEN = os.environ.get('TOKEN')
 PORT = os.environ.get('PORT', 5000)
-
 # Heroku Database Parameters
 heroku_host = os.environ.get('HOST')
 heroku_database = os.environ.get('DATABASE')
@@ -92,6 +91,29 @@ def write_to_db(update, context: CallbackContext):  #
         context.bot.send_message(chat_id=chat_id,
                                  text="Thanks you but you don't have permission to modify the database.")
         pass
+
+# auto reminder
+# Starting the bot
+import telegram
+bot = telegram.Bot(TOKEN)
+def auto_remind(bot):
+    chat_id = "-1001248983748"
+    bot.send_message(chat_id=chat_id, text="Good Morning Guys")
+    bot.send_message(chat_id=chat_id, text="Revise the below topics today:")
+    with conn:
+        with conn.cursor() as cur:
+            cur.execute("SELECT * FROM topiclist")
+            data = cur.fetchall()
+
+    for i in range(len(data)):
+        topic_date = data[i][0]
+        if date.today() - topic_date == remind_period0 or date.today() - topic_date == remind_period3 or date.today() - topic_date == remind_period7 or date.today() - topic_date == remind_period21:
+            topic = "[" + str(topic_date) + "] " + data[i][1]
+            bot.send_message(chat_id=chat_id, text=topic)
+
+auto_remind(bot)
+
+
 
 
 def remind(update, context: CallbackContext):
