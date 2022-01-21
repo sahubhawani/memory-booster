@@ -109,22 +109,6 @@ def remind(update, context: CallbackContext):
             context.bot.send_message(chat_id=chat_id, text=topic)
 
 
-def auto_remind(context: CallbackContext):
-    chat_id = "-1001248983748"
-    context.bot.send_message(chat_id=chat_id, text="Good Morning Guys")
-    context.bot.send_message(chat_id=chat_id, text="Revise the below topics today:")
-    with conn:
-        with conn.cursor() as cur:
-            cur.execute("SELECT * FROM topiclist")
-            data = cur.fetchall()
-
-    for i in range(len(data)):
-        topic_date = data[i][0]
-        if date.today() - topic_date == remind_period0 or date.today() - topic_date == remind_period3 or date.today() - topic_date == remind_period7 or date.today() - topic_date == remind_period21:
-            topic = "[" + str(topic_date) + "] " + data[i][1]
-            context.bot.send_message(chat_id=chat_id, text=topic)
-
-
 def show_all(update, context: CallbackContext):
     chat_id = update.message.chat_id
     context.bot.send_message(chat_id=chat_id, text="Here is the list of all the topics in the Database:")
@@ -160,7 +144,6 @@ def main():
     updater = Updater(TOKEN, use_context=True)
     job_queue = updater.job_queue
     dp = updater.dispatcher
-    job_queue.run_daily(auto_remind, time(hour=0, minute=1, second=50))
     dp.add_handler(MessageHandler(Filters.text & ~Filters.command, write_to_db))
     dp.add_handler(CommandHandler("remind", remind))
     dp.add_handler(CommandHandler("show_all", show_all))
