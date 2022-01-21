@@ -42,6 +42,4 @@ def auto_remind(bot):
             topic = "[" + str(topic_date) + "] " + data[i][1]
             bot.send_message(chat_id=chat_id, text=topic)
 
-
 auto_remind(bot)
-
